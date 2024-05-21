@@ -12,6 +12,9 @@
 #define EMPTY 0
 #define UNKNOWN (-1)
 
+#define COMPARISON_PASS 0
+#define COMPARISON_UNPASS (-1)
+
 #define MIN_PRINT_ASCII 0x07 //ASCII最小值
 #define MAX_PRINT_ASCII 0x7e //ASCII最大值
 #define MAX_FLAG_LENGTH 0xff //碰撞flag最大长度
