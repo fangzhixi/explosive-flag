@@ -22,7 +22,9 @@
   <component name="ChangeListManager">
     <list default="true" id="16e64e1a-ac1c-42a9-b508-098ccacf16ea" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/explosive_flag.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/explosive_flag.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools.c" beforeDir="false" afterPath="$PROJECT_DIR$/tools.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,7 +93,7 @@
       <updated>1716300884974</updated>
       <workItem from="1716300887069" duration="128000" />
       <workItem from="1716301043524" duration="523000" />
-      <workItem from="1716302213761" duration="939000" />
+      <workItem from="1716302213761" duration="1299000" />
     </task>
     <servers />
   </component>

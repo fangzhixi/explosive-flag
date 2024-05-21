@@ -30,12 +30,18 @@ void generateJump() {
     longjmp(jump_buf, 1);
 }
 
+/*
+ * 字符串复制，平替strcpy
+ * 除复制主体字符串外，新增后缀复制功能，即复制suffix内容
+ * */
 char *generateStrcpy(char *dest, char *source) {
+
     strcpy(dest, source);
-    if (flag_suffix_index == UNKNOWN) {
-        return flag_result;
+
+    if (flag_suffix_index > UNKNOWN && flag_suffix_index < MAX_FLAG_LENGTH) {
+        strcpy(&dest[flag_suffix_index], &source[flag_suffix_index]);
     }
-    strcpy(&dest[flag_suffix_index], &source[flag_suffix_index]);
+
     return flag_result;
 }
 
