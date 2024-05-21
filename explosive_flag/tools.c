@@ -3,7 +3,9 @@
 int flag_max_len = MAX_FLAG_LENGTH;
 char flag_str[MAX_FLAG_LENGTH] = {0};
 char flag_result[MAX_FLAG_LENGTH] = {0};
-char flag_suffix[MAX_FLAG_LENGTH / 8] = {0};
+int flag_prefix_len = UNKNOWN;
+int flag_suffix_index = UNKNOWN;
+bool is_add_prefix_index = false; //是否已经添加前缀下标补偿
 
 jmp_buf jump_buf;
 
@@ -28,6 +30,15 @@ void generateJump() {
     longjmp(jump_buf, 1);
 }
 
+char *generateStrcpy(char *dest, char *source) {
+    strcpy(dest, source);
+    if (flag_suffix_index == UNKNOWN) {
+        return flag_result;
+    }
+    strcpy(&dest[flag_suffix_index], &source[flag_suffix_index]);
+    return flag_result;
+}
+
 /*
  * 碰撞flag
  * 使用场景为flag与目标数组逐一比对验证
@@ -48,7 +59,7 @@ char *GenerateFlag(int match_status, int match_index) {
     int flag_match_len = (int) strlen(flag_str);
     if (flag_match_len == 0) {
         flag_str[0] = MIN_PRINT_ASCII;
-        strcpy(flag_result, flag_str);
+        generateStrcpy(flag_result, flag_str);
         return flag_result;
     }
 
@@ -60,12 +71,20 @@ char *GenerateFlag(int match_status, int match_index) {
     char ascii;
     switch (match_status) {
         case GENERATE_STATUS_IS_MATCH_CURRENT_VALUE:
+            //flag碰撞数组位置补偿
+            if (is_add_prefix_index || (flag_prefix_len != UNKNOWN && match_index < flag_prefix_len)) {
+                match_index += flag_prefix_len;
+                is_add_prefix_index = true;
+            }
             if (match_index >= 0 && flag_match_len != match_index + 1) {
                 return flag_result;
             }
+            if (flag_match_len == MAX_FLAG_LENGTH) {
+                printf("\n测试用例存在缺陷, 请检查放置GENERATE_STATUS_IS_MATCH_CURRENT_VALUE位置是否正确\n");
+            }
             printf("%s\n", flag_str);
             flag_str[flag_match_len] = MIN_PRINT_ASCII;
-            strcpy(flag_result, flag_str);
+            generateStrcpy(flag_result, flag_str);
             return flag_result;
 
         case GENERATE_STATUS_IS_NOT_MATCH_CURRENT_VALUE:
@@ -84,22 +103,22 @@ char *GenerateFlag(int match_status, int match_index) {
                     flag_match_len = i;
                     flag_str[flag_match_len - 1] += 1;
                     flag_str[flag_match_len] = '\0';//清空当前字符
-                    strcpy(flag_result, flag_str);
+                    generateStrcpy(flag_result, flag_str);
                     generateJump();
                 }
             }
 
             flag_str[flag_match_len - 1] += 1;
-            strcpy(flag_result, flag_str);
+            generateStrcpy(flag_result, flag_str);
             generateJump();
 
         case GENERATE_STATUS_FINISH:
-            printf("\n碰撞结束!\n结果: %s%s\n", flag_str, flag_suffix);
+            printf("\n碰撞结束!\n结果: %s\n", flag_str);
             return flag_result;
 
         case GENERATE_STATUS_CLEAR_VALUE:
             memset(flag_str, '\0', MAX_FLAG_LENGTH);
-            strcpy(flag_result, flag_str);
+            generateStrcpy(flag_result, flag_str);
             return flag_result;
 
         default:
@@ -118,15 +137,15 @@ bool GenerateFlagPrefix(char *prefix_str) {
         return false;
     }
 
-    int prefix_str_len = (int) strlen(prefix_str);
+    flag_prefix_len = (int) strlen(prefix_str);
     for (int i = (int) strlen(flag_str) - 1; i >= 0; i--) {
-        flag_str[i + prefix_str_len] = flag_str[i];
+        flag_str[i + flag_prefix_len] = flag_str[i];
     }
 
-    for (int i = 0; i < prefix_str_len; i++) {
+    for (int i = 0; i < flag_prefix_len; i++) {
         flag_str[i] = prefix_str[i];
     }
-    strcpy(flag_result, flag_str);
+    generateStrcpy(flag_result, flag_str);
     return true;
 }
 
@@ -134,8 +153,18 @@ bool GenerateFlagPrefix(char *prefix_str) {
  * 增加flag后缀
  * 手动增加后缀不影响flag碰撞结果
  * */
-bool GenerateFlagSuffix(char *suffix_str) {
-    strcpy(flag_suffix, suffix_str);
+bool GenerateFlagSuffix(char *suffix_str, int suffix_index) {
+    int suffix_str_len = (int) strlen(suffix_str);
+    if (suffix_index + suffix_str_len > MAX_FLAG_LENGTH) {
+        printf("flag后缀超出额定长度, 放弃追加后缀\n");
+        return false;
+    }
+
+    flag_suffix_index = suffix_index;
+    for (int i = 0; i < suffix_str_len; i++) {
+        flag_str[flag_suffix_index + i] = suffix_str[i];
+    }
+    generateStrcpy(flag_result, flag_str);
     return true;
 }
 
@@ -150,7 +179,7 @@ bool GenerateFlagSuffix(char *suffix_str) {
  *  param target_str 目标字符串(flag等)
  * */
 int GenerateStrcmp(char *generate_str, char *target_str) {
-    int is_success = true;
+    int comparison_value = 0;//误差值
     int str_len_max = (int) strlen(target_str);
     int str_len_min = (int) strlen(generate_str);
 
@@ -171,11 +200,11 @@ int GenerateStrcmp(char *generate_str, char *target_str) {
         } else {
             //碰撞失败
             GenerateFlag(GENERATE_STATUS_IS_NOT_MATCH_CURRENT_VALUE, i);
-            is_success = false;
+            comparison_value = -1;
         }
     }
     GenerateFlag(GENERATE_STATUS_FINISH, GENERATE_MATCH_NO_PARSE_LOOP_INDEX);
-    return is_success;
+    return comparison_value;
 }
 
 /*

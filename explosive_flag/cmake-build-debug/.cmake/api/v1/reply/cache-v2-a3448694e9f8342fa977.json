@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "f:/C++/Reverse/project/cmake-build-debug"
+			"value" : "f:/C++/binary-reverse/explosive_flag/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "F:/C++/Reverse/project/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "F:/C++/binary-reverse/explosive_flag/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "F:/C++/Reverse/project"
+			"value" : "F:/C++/binary-reverse/explosive_flag"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/project"
+			"value" : "C:/Program Files (x86)/explosive_flag"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -731,7 +731,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "project"
+			"value" : "explosive_flag"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1122,7 +1122,7 @@
 			"value" : "TRUE"
 		},
 		{
-			"name" : "project_BINARY_DIR",
+			"name" : "explosive_flag_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1131,10 +1131,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "F:/C++/Reverse/project/cmake-build-debug"
+			"value" : "F:/C++/binary-reverse/explosive_flag/cmake-build-debug"
 		},
 		{
-			"name" : "project_IS_TOP_LEVEL",
+			"name" : "explosive_flag_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1146,7 +1146,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "project_SOURCE_DIR",
+			"name" : "explosive_flag_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1155,7 +1155,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "F:/C++/Reverse/project"
+			"value" : "F:/C++/binary-reverse/explosive_flag"
 		}
 	],
 	"kind" : "cache",

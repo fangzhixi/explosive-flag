@@ -10,8 +10,9 @@
 #include <malloc.h>
 
 #define EMPTY 0
+#define UNKNOWN (-1)
 
-#define MIN_PRINT_ASCII 0x7 //ASCII最小值
+#define MIN_PRINT_ASCII 0x07 //ASCII最小值
 #define MAX_PRINT_ASCII 0x7e //ASCII最大值
 #define MAX_FLAG_LENGTH 0xff //碰撞flag最大长度
 
@@ -38,4 +39,4 @@ int GenerateStrcmp(char *str1, char *str2);
 
 bool GenerateFlagPrefix(char *prefix_str);
 
-bool GenerateFlagSuffix(char *suffix_str);
+bool GenerateFlagSuffix(char *suffix_str, int suffix_index);

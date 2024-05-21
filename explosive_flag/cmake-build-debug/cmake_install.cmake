@@ -1,4 +1,4 @@
-# Install script for directory: F:/C++/Reverse/explosive_flag
+# Install script for directory: F:/C++/binary-reverse/explosive_flag
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "F:/C++/Reverse/explosive_flag/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "F:/C++/binary-reverse/explosive_flag/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
