@@ -4,7 +4,7 @@ int flag_max_len = MAX_FLAG_LENGTH;//flag字符串长度限制
 char flag_str[MAX_FLAG_LENGTH] = {0};//flag测试字符串
 char flag_result[MAX_FLAG_LENGTH] = {0};//flag测试字符串备份
 int flag_prefix_len = UNKNOWN;//flag前缀 ( flag{ )
-int flag_suffix_index = UNKNOWN;//flag后缀( } )
+int flag_suffix_index = UNKNOWN;//flag后缀下标位置( } )
 bool is_add_prefix_index = false; //是否已经添加前缀下标补偿
 
 jmp_buf jump_buf;//强制跳转栈空间
