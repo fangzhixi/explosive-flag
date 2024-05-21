@@ -174,12 +174,12 @@ bool GenerateFlagSuffix(char *suffix_str, int suffix_index) {
  *  此方法对三种可能性进行处理
  *      ①当前字符与目标值不一致时，提供新的字符并强制跳转到标记点参与新一次碰撞
  *      ②当前字符与目标值一致时，记录当前字符并寻找下一个字符
- *      ③碰撞字符串与目标值完成一致时，碰撞成功，输出结果
+ *      ③碰撞字符串与目标值完全一致时，碰撞成功，输出结果
  *  param generate_str 碰撞字符串
  *  param target_str 目标字符串(flag等)
  * */
 int GenerateStrcmp(char *generate_str, char *target_str) {
-    int is_success = true;
+    int comparison_value = 0;//误差值
     int str_len_max = (int) strlen(target_str);
     int str_len_min = (int) strlen(generate_str);
 
@@ -200,11 +200,11 @@ int GenerateStrcmp(char *generate_str, char *target_str) {
         } else {
             //碰撞失败
             GenerateFlag(GENERATE_STATUS_IS_NOT_MATCH_CURRENT_VALUE, i);
-            is_success = false;
+            comparison_value = -1;
         }
     }
     GenerateFlag(GENERATE_STATUS_FINISH, GENERATE_MATCH_NO_PARSE_LOOP_INDEX);
-    return is_success;
+    return comparison_value;
 }
 
 /*

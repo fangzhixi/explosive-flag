@@ -174,7 +174,7 @@ bool GenerateFlagSuffix(char *suffix_str, int suffix_index) {
  *  此方法对三种可能性进行处理
  *      ①当前字符与目标值不一致时，提供新的字符并强制跳转到标记点参与新一次碰撞
  *      ②当前字符与目标值一致时，记录当前字符并寻找下一个字符
- *      ③碰撞字符串与目标值完成一致时，碰撞成功，输出结果
+ *      ③碰撞字符串与目标值完全一致时，碰撞成功，输出结果
  *  param generate_str 碰撞字符串
  *  param target_str 目标字符串(flag等)
  * */
